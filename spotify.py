@@ -13,7 +13,7 @@ class Album:
         self.releaseDate = releaseDate
 
     def __str__(self):
-        return f"{self.name}-{self.releaseDate}"
+        return f"{self.name} - {self.releaseDate}"
 
 def getArtistID(artist):
     searchResult = sp.search(artist,1,type='artist')
