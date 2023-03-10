@@ -1,15 +1,7 @@
 import pandas as pd
-from datetime import datetime
 from datetime import date
-
-class Artist:
-    def __init__(self, uri, name, lastVisited):
-        self.uri = uri
-        self.name = name
-        self.lastVisited = lastVisited
-
-    def __str__(self):
-        return f"{self.name} - {self.uri} - {self.lastVisited}"
+from music import Artist
+from spotify import *
 
 def getData() -> pd.DataFrame:
     df = pd.read_csv("data/data.csv", index_col=0)
@@ -31,10 +23,18 @@ def getDataAsList(df :pd.DataFrame):
     result = [Artist(uri,name,lastVisited) for uri,name,lastVisited in zip(df['uri'], df['name'], df['last visited'])]
     return result
 
-df = getData()
 
-artists = getDataAsList(df)
+def songpoll():
+    allTracks = []
+    df = getData()
+    artists = getDataAsList(df)
+    for artist in artists:
+        albums = getArtistAlbumsAfterVisitDate(artist.id,artist.lastVisited)
+        for album in albums:
+            tracks = getAlbumTracks(album)
+            for track in tracks:
+                spAdd.playlist_add_items("6fIMpwbZo8wrKCDNmGjiS3",[track.id])
+                allTracks.append(track)
+    return allTracks
 
-for artist in artists:
-    print(artist)
-
+songpoll()
