@@ -1,9 +1,9 @@
 package main
 
 import (
-	"fmt"
+	"github.com/cassandramcc/songpoll/api"
 )
 
 func main() {
-	fmt.Println("Hello, world!")
+	api.StartServer()
 }
