@@ -26,7 +26,7 @@ const redirectURI = "http://localhost:8080/callback"
 
 var (
 	auth = spotifyauth.New(spotifyauth.WithRedirectURL(redirectURI),
-		spotifyauth.WithScopes(spotifyauth.ScopeUserReadPrivate, spotifyauth.ScopeUserLibraryRead))
+		spotifyauth.WithScopes(spotifyauth.ScopeUserReadPrivate, spotifyauth.ScopeUserLibraryRead, spotifyauth.ScopePlaylistModifyPrivate))
 	ch    = make(chan *spotify.Client)
 	state = "abc123"
 )

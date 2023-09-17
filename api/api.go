@@ -40,6 +40,25 @@ func GetArtistAlbumsAfterDate(ctx context.Context, client *spotify.Client, artis
 	return filteredAlbums
 }
 
+func GetAlbumTracks(ctx context.Context, client *spotify.Client, albumID string) []*model.Track {
+	var results []*model.Track
+	offset := 0
+	complete := false
+	for !complete {
+		result, err := client.GetAlbumTracks(ctx, spotify.ID(albumID), spotify.Offset(offset), spotify.Limit(50))
+		if err != nil {
+			panic(err)
+		}
+		results = append(results, extractTrackDetails(result.Tracks)...)
+		if result.Next == "" {
+			complete = true
+		}
+		offset += 50
+	}
+	printTrackDetails(results)
+	return results
+}
+
 func extractAlbumDetails(albums []spotify.SimpleAlbum) []*model.Album {
 	var extractedAlbums []*model.Album
 	for _, album := range albums {
@@ -52,8 +71,45 @@ func extractAlbumDetails(albums []spotify.SimpleAlbum) []*model.Album {
 	return extractedAlbums
 }
 
+func extractTrackDetails(tracks []spotify.SimpleTrack) []*model.Track {
+	var extractedTracks []*model.Track
+	for _, track := range tracks {
+		var artists []model.Artist
+		for _, artist := range track.Artists {
+			artists = append(artists, model.Artist{
+				ID:   artist.ID.String(),
+				Name: artist.Name,
+			})
+		}
+		extractedTracks = append(extractedTracks, &model.Track{
+			ID:      track.ID.String(),
+			Name:    track.Name,
+			Artists: artists,
+			Album: model.Album{
+				ID:   track.Album.ID.String(),
+				Name: track.Album.Name,
+			},
+		})
+	}
+	return extractedTracks
+}
+
+func GetTrackIDs(tracks []*model.Track) []spotify.ID {
+	var ids []spotify.ID
+	for _, track := range tracks {
+		ids = append(ids, spotify.ID(track.ID))
+	}
+	return ids
+}
+
 func printAlbumDetails(albums []*model.Album) {
 	for _, album := range albums {
 		fmt.Println(album.Name + " " + album.ReleaseDate.String())
+	}
+}
+
+func printTrackDetails(tracks []*model.Track) {
+	for _, track := range tracks {
+		fmt.Println(track.Name)
 	}
 }
