@@ -31,7 +31,7 @@ var (
 	state = "abc123"
 )
 
-func StartServer() {
+func StartServer() *spotify.Client {
 	// first start an HTTP server
 	http.HandleFunc("/callback", completeAuth)
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
@@ -56,6 +56,7 @@ func StartServer() {
 		log.Fatal(err)
 	}
 	fmt.Println("You are logged in as:", user.ID)
+	return client
 }
 
 func completeAuth(w http.ResponseWriter, r *http.Request) {
