@@ -6,7 +6,6 @@ import (
 	"net/http"
 	"os"
 
-	"github.com/joho/godotenv"
 	"golang.org/x/oauth2"
 )
 
@@ -71,13 +70,14 @@ const (
 //
 // Example:
 //
-//	a := spotifyauth.New(redirectURL, spotify.ScopeUserLibraryRead, spotify.ScopeUserFollowRead)
-//	// direct user to Spotify to log in
-//	http.Redirect(w, r, a.AuthURL("state-string"), http.StatusFound)
+//     a := spotifyauth.New(redirectURL, spotify.ScopeUserLibraryRead, spotify.ScopeUserFollowRead)
+//     // direct user to Spotify to log in
+//     http.Redirect(w, r, a.AuthURL("state-string"), http.StatusFound)
 //
-//	// then, in redirect handler:
-//	token, err := a.Token(state, r)
-//	client := a.Client(token)
+//     // then, in redirect handler:
+//     token, err := a.Token(state, r)
+//     client := a.Client(token)
+//
 type Authenticator struct {
 	config *oauth2.Config
 }
@@ -119,7 +119,6 @@ func WithRedirectURL(url string) AuthenticatorOption {
 //
 // By default, NewAuthenticator pulls your client ID and secret key from the SPOTIFY_ID and SPOTIFY_SECRET environment variables.
 func New(opts ...AuthenticatorOption) *Authenticator {
-	godotenv.Load()
 	cfg := &oauth2.Config{
 		ClientID:     os.Getenv("SPOTIFY_ID"),
 		ClientSecret: os.Getenv("SPOTIFY_SECRET"),

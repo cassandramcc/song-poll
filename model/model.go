@@ -3,9 +3,9 @@ package model
 import "time"
 
 type Artist struct {
-	ID         string
-	Name       string
-	LastVisted time.Time
+	ID         string    `csv:"uri"`
+	Name       string    `csv:"name"`
+	LastVisted time.Time `csv:"last_visited"`
 }
 
 type Album struct {
