@@ -2,7 +2,6 @@ package api
 
 import (
 	"context"
-	"fmt"
 	"time"
 
 	"github.com/cassandramcc/songpoll/model"
@@ -38,7 +37,6 @@ func GetArtistAlbumsAfterDate(ctx context.Context, client *spotify.Client, artis
 			filteredAlbums = append(filteredAlbums, album)
 		}
 	}
-	printAlbumDetails(filteredAlbums)
 	return filteredAlbums
 }
 
@@ -58,7 +56,6 @@ func GetAlbumTracks(ctx context.Context, client *spotify.Client, albumID string)
 		}
 		offset += 50
 	}
-	printTrackDetails(results)
 	return results
 }
 
@@ -106,16 +103,4 @@ func GetTrackIDs(tracks []*model.Track) []spotify.ID {
 		ids = append(ids, spotify.ID(track.ID))
 	}
 	return ids
-}
-
-func printAlbumDetails(albums []*model.Album) {
-	for _, album := range albums {
-		fmt.Println(album.Name + " " + album.ReleaseDate.String())
-	}
-}
-
-func printTrackDetails(tracks []*model.Track) {
-	for _, track := range tracks {
-		fmt.Println(track.Name)
-	}
 }
