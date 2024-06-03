@@ -9,6 +9,7 @@ import (
 	"github.com/zmb3/spotify/v2"
 )
 
+// GetArtistAlbums retrieves all albums for a given artist
 func GetArtistAlbums(ctx context.Context, client *spotify.Client, artistID string) []*model.Album {
 	var results []*model.Album
 	offset := 0
@@ -28,6 +29,7 @@ func GetArtistAlbums(ctx context.Context, client *spotify.Client, artistID strin
 	return results
 }
 
+// GetArtistAlbumsAfterDate retrieves all albums for a given artist after a given date
 func GetArtistAlbumsAfterDate(ctx context.Context, client *spotify.Client, artistID string, date time.Time) []*model.Album {
 	albums := GetArtistAlbums(ctx, client, artistID)
 	var filteredAlbums []*model.Album
@@ -40,6 +42,7 @@ func GetArtistAlbumsAfterDate(ctx context.Context, client *spotify.Client, artis
 	return filteredAlbums
 }
 
+// GetAlbumTracks retrieves all tracks for a given album
 func GetAlbumTracks(ctx context.Context, client *spotify.Client, albumID string) []*model.Track {
 	var results []*model.Track
 	offset := 0
@@ -59,6 +62,7 @@ func GetAlbumTracks(ctx context.Context, client *spotify.Client, albumID string)
 	return results
 }
 
+// Converts a slice of spotify.SimpleAlbums to a slice of model.Albums
 func extractAlbumDetails(albums []spotify.SimpleAlbum) []*model.Album {
 	var extractedAlbums []*model.Album
 	for _, album := range albums {
@@ -71,6 +75,7 @@ func extractAlbumDetails(albums []spotify.SimpleAlbum) []*model.Album {
 	return extractedAlbums
 }
 
+// Converts a slice of spotify.SimpleTracks to a slice of model.Tracks
 func extractTrackDetails(tracks []spotify.SimpleTrack) []*model.Track {
 	var extractedTracks []*model.Track
 	for _, track := range tracks {
@@ -94,6 +99,7 @@ func extractTrackDetails(tracks []spotify.SimpleTrack) []*model.Track {
 	return extractedTracks
 }
 
+// GetTrackIDs gets the track ids from a slice of tracks
 func GetTrackIDs(tracks []*model.Track) []spotify.ID {
 	var ids []spotify.ID
 	for _, track := range tracks {
