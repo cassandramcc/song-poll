@@ -3,21 +3,21 @@ package model
 import "time"
 
 type Artist struct {
-	ID         string    `json:"id"`
-	Name       string    `json:"name"`
-	LastVisted time.Time `json:"last_visited"`
+	ID         string
+	Name       string
+	LastVisted time.Time
 }
 
 type Album struct {
-	ID          string    `json:"id"`
-	Name        string    `json:"name"`
-	Artists     []Artist  `json:"artists"`
-	ReleaseDate time.Time `json:"release_date"`
+	ID          string
+	Name        string
+	Artists     []Artist
+	ReleaseDate time.Time
 }
 
 type Track struct {
-	ID      string   `json:"id"`
-	Name    string   `json:"name"`
-	Artists []Artist `json:"artists"`
-	Album   Album    `json:"album"`
+	ID      string
+	Name    string
+	Artists []Artist
+	Album   Album
 }
