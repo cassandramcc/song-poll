@@ -1,0 +1,6 @@
+services:
+  song-poll:
+    build: .
+    ports:
+    - 8080:8080
+    command: go run main.go data/small.csv

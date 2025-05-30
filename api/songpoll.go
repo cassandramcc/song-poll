@@ -7,9 +7,9 @@ import (
 	"github.com/cassandramcc/songpoll/data"
 )
 
-func SongPoll(ctx context.Context) {
+func SongPoll(ctx context.Context, dataPath string) {
 	client := StartServer()
-	artists := data.GetDataFromCSV(`data\test.csv`)
+	artists := data.GetDataFromCSV(dataPath)
 	for _, artist := range artists {
 		fmt.Println("• Processing artist: ", artist.Name)
 		albums := GetArtistAlbumsAfterDate(ctx, client, artist.ID, artist.LastVisted)

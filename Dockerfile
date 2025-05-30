@@ -5,5 +5,3 @@ ENV GO111MODULE=on
 WORKDIR /app
 
 COPY . /app
-
-RUN go run main.go
