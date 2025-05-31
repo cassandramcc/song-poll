@@ -2,5 +2,17 @@ services:
   song-poll:
     build: .
     ports:
-    - 8080:8080
+      - 8080:8080
     command: go run main.go data/small.csv
+    depends_on:
+      mongo:
+        condition: service_healthy
+  mongo:
+    image: mongo:8.0-rc
+    ports:
+      - 27017:27017
+    volumes:
+      - mongo-data:/data/db
+
+volumes:
+  mongo-data:
