@@ -12,7 +12,7 @@ func SongPoll(ctx context.Context, dataPath string) {
 	artists := data.GetDataFromCSV(dataPath)
 	for _, artist := range artists {
 		fmt.Println("• Processing artist: ", artist.Name)
-		albums := GetArtistAlbumsAfterDate(ctx, client, artist.ID, artist.LastVisted)
+		albums := GetArtistAlbumsAfterDate(ctx, client, artist.URI, artist.LastVisted)
 		for _, album := range albums {
 			fmt.Println("  • Adding tracks from album: ", album.Name)
 			tracks := GetAlbumTracks(ctx, client, album.ID)

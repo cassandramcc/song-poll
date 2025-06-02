@@ -17,9 +17,9 @@ func TestGetDataFromCSV(t *testing.T) {
 	assert.Equal(t, "Skeler", artists[1].Name)
 	assert.Equal(t, "Ytho", artists[2].Name)
 
-	assert.Equal(t, "3GZ8Rfap7VxAOzABiZEXCL", artists[0].ID)
-	assert.Equal(t, "7ks4LdnBvp6HUsmVJiKgsB", artists[1].ID)
-	assert.Equal(t, "5x0yHFCXMkXydFudgs6o3y", artists[2].ID)
+	assert.Equal(t, "3GZ8Rfap7VxAOzABiZEXCL", artists[0].URI)
+	assert.Equal(t, "7ks4LdnBvp6HUsmVJiKgsB", artists[1].URI)
+	assert.Equal(t, "5x0yHFCXMkXydFudgs6o3y", artists[2].URI)
 
 	assert.Equal(t, expTime, artists[0].LastVisted)
 	assert.Equal(t, expTime, artists[1].LastVisted)

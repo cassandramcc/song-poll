@@ -79,7 +79,7 @@ func extractTrackDetails(tracks []spotify.SimpleTrack) []*model.Track {
 		var artists []model.Artist
 		for _, artist := range track.Artists {
 			artists = append(artists, model.Artist{
-				ID:   artist.ID.String(),
+				URI:  artist.ID.String(),
 				Name: artist.Name,
 			})
 		}
