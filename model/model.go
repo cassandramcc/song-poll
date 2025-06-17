@@ -3,9 +3,9 @@ package model
 import "time"
 
 type Artist struct {
-	URI        string    `bson,csv:"uri"`
-	Name       string    `bson,csv:"name"`
-	LastVisted time.Time `bson,csv:"last_visited"`
+	URI        string    `json,bson,csv:"uri"`
+	Name       string    `json,bson,csv:"name"`
+	LastVisted time.Time `json,bson,csv:"last_visited"`
 }
 
 type Album struct {
