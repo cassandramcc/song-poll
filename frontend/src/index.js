@@ -3,15 +3,24 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 import TextBox from './components/TextBox';
-import BasicButton from './components/Button';
 import TitleBar from './components/TitleBar';
+import ButtonAPICall from './components/ButtonAPICall';
+import Search from './components/Search';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <TitleBar />
-    <TextBox />
-    <BasicButton buttonText='Get Artists'/>
+    <ButtonAPICall 
+      buttonText='Login'
+      endpoint='http://localhost:8080/login'
+      displayResponse={false}
+    />
+    <ButtonAPICall 
+      buttonText='Get Artists' 
+      endpoint='http://localhost:8080/artists'
+    />
+    <Search />
   </React.StrictMode>
 );
 

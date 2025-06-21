@@ -5,6 +5,7 @@ import (
 	"time"
 
 	"github.com/cassandramcc/songpoll/model"
+	"github.com/pkg/errors"
 	"github.com/zmb3/spotify/v2"
 )
 
@@ -103,4 +104,21 @@ func GetTrackIDs(tracks []*model.Track) []spotify.ID {
 		ids = append(ids, spotify.ID(track.ID))
 	}
 	return ids
+}
+
+func SearchForArtist(ctx context.Context, query string, client *spotify.Client) ([]*model.Artist, error) {
+	result, err := client.Search(ctx, query, spotify.SearchTypeArtist, spotify.Limit(5))
+	if err != nil {
+		return nil, errors.Wrap(err, "failed to search spotify")
+	}
+
+	var artists []*model.Artist
+	for _, artist := range result.Artists.Artists {
+		artists = append(artists, &model.Artist{
+			URI:  string(artist.URI),
+			Name: artist.Name,
+		})
+	}
+
+	return artists, nil
 }
