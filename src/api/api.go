@@ -4,7 +4,7 @@ import (
 	"context"
 	"time"
 
-	"github.com/cassandramcc/songpoll/model"
+	"github.com/cassandramcc/songpoll/src/model"
 	"github.com/pkg/errors"
 	"github.com/zmb3/spotify/v2"
 )

@@ -4,7 +4,7 @@ import (
 	"context"
 	"testing"
 
-	"github.com/cassandramcc/songpoll/config"
+	"github.com/cassandramcc/songpoll/src/config"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"go.mongodb.org/mongo-driver/v2/bson"

@@ -4,10 +4,10 @@ import (
 	"context"
 	"log"
 
-	"github.com/cassandramcc/songpoll/config"
-	"github.com/cassandramcc/songpoll/core"
-	"github.com/cassandramcc/songpoll/mongo"
-	"github.com/cassandramcc/songpoll/server"
+	"github.com/cassandramcc/songpoll/src/config"
+	"github.com/cassandramcc/songpoll/src/core"
+	"github.com/cassandramcc/songpoll/src/mongo"
+	"github.com/cassandramcc/songpoll/src/server"
 
 	"github.com/joho/godotenv"
 )

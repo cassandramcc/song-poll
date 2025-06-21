@@ -3,8 +3,8 @@ package core
 import (
 	"context"
 
-	"github.com/cassandramcc/songpoll/model"
-	"github.com/cassandramcc/songpoll/mongo"
+	"github.com/cassandramcc/songpoll/src/model"
+	"github.com/cassandramcc/songpoll/src/mongo"
 	"github.com/pkg/errors"
 )
 

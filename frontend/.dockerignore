@@ -1,0 +1,9 @@
+# ignore all files
+*
+
+# add what is needed
+!node_modules/
+!public/
+!src/
+!package-lock.json
+!package.json

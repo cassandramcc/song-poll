@@ -11,11 +11,7 @@ import Artists from './components/model/Artists';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <TitleBar />
-    <ButtonAPICall 
-      buttonText='Login'
-      endpoint='http://localhost:8080/login'
-    />
+    <TitleBar/>
     <ButtonAPICall 
       buttonText='Get Artists' 
       endpoint='http://localhost:8080/artists'

@@ -3,7 +3,7 @@ package data
 import (
 	"os"
 
-	"github.com/cassandramcc/songpoll/model"
+	"github.com/cassandramcc/songpoll/src/model"
 	"github.com/gocarina/gocsv"
 )
 

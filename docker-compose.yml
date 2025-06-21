@@ -3,10 +3,12 @@ services:
     build: .
     ports:
       - 8080:8080
-    command: go run main.go data/small.csv
-    depends_on:
-      mongo:
-        condition: service_healthy
+    command: go run main.go
+  frontend:
+    build: ./frontend
+    ports:
+      - "3000:3000"
+    command: npm start
   mongo:
     image: mongo:8.0-rc
     ports:

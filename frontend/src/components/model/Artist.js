@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import './Artist.css';
 
 export default function Artist(
     {
@@ -7,9 +7,9 @@ export default function Artist(
     }
 ) {
     return (
-        <div>
-            <p>Name: {Name}</p>
-            <p>URI: {URI}</p>
+        <div className="artist-container">
+            <p className="artist-field bold">{Name}</p>
+            <p className="artist-field">{URI}</p>
         </div>
     )
 }

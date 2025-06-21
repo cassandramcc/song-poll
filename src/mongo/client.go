@@ -4,8 +4,8 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/cassandramcc/songpoll/config"
-	"github.com/cassandramcc/songpoll/model"
+	"github.com/cassandramcc/songpoll/src/config"
+	"github.com/cassandramcc/songpoll/src/model"
 	"github.com/pkg/errors"
 
 	"go.mongodb.org/mongo-driver/v2/bson"

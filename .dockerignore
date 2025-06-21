@@ -2,9 +2,7 @@
 *
 
 # add what is needed
-!api/
-!data/
-!model/
+!src/
 !vendor/
 !go.mod
 !go.sum

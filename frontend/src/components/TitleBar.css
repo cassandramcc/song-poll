@@ -1,0 +1,44 @@
+.title-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+  background-color: #f8f9fa;
+  border-bottom: 1px solid #dee2e6;
+}
+
+.title-bar h1 {
+  margin: 0;
+  font-size: 1.5rem;
+  color: #000000;
+}
+
+.login-section {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.login-section p {
+  margin: 0;
+  font-weight: 500;
+  color: #666;
+}
+
+.login-section button {
+  padding: 0.5rem 1rem;
+  background-color: #b700ff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.login-section button:hover {
+  background-color: #b30080;
+}
+
+.login-section button:active {
+  background-color: #940043;
+}

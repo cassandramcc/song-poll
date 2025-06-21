@@ -9,8 +9,8 @@ import (
 	"net/http"
 	"os"
 
-	"github.com/cassandramcc/songpoll/api"
-	"github.com/cassandramcc/songpoll/core"
+	"github.com/cassandramcc/songpoll/src/api"
+	"github.com/cassandramcc/songpoll/src/core"
 
 	spotifyauth "github.com/zmb3/spotify/v2/auth"
 
@@ -29,6 +29,11 @@ var (
 	ch    = make(chan *spotify.Client)
 	state = "abc123"
 )
+
+type Login struct {
+	OK       bool   `json:"OK"`
+	Username string `json:"username"`
+}
 
 func enableCORS(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Access-Control-Allow-Origin", "http://localhost:3000")
@@ -51,10 +56,15 @@ func (s *Server) Login(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		log.Fatal(err)
 	}
-	fmt.Println("You are logged in as:", user.ID)
+	fmt.Println("Logged in as:", user.ID)
 	s.SpotifyClient = client
 
-	json.NewEncoder(w).Encode("{login: ok}")
+	login := Login{
+		OK:       true,
+		Username: user.ID,
+	}
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(login)
 }
 
 func (s *Server) completeAuth(w http.ResponseWriter, r *http.Request) {
