@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
-import Artist from './Artist';
 
 export default function ButtonAPICall(
     { 
         buttonText = "Default Button Text", 
         endpoint = "no endpoint",
         query = '',
-        displayResponse = true
+        ResponseComponent = null
     }
 ) {
   const [isClicked, setIsClicked] = useState(false);
@@ -48,16 +47,8 @@ export default function ButtonAPICall(
         {buttonText}
       </button>
 
-      {response && !error && displayResponse && (
-        response.map((artist, index) => {
-          return (
-            <Artist 
-              key={index}
-              Name={artist.Name}
-              URI={artist.URI}
-            />
-          )
-        })
+      {response && !error && ResponseComponent && (
+        <ResponseComponent data={response} />
       )}
     </div>
   );
