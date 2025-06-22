@@ -8,9 +8,11 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"time"
 
 	"github.com/cassandramcc/songpoll/src/api"
 	"github.com/cassandramcc/songpoll/src/core"
+	"github.com/cassandramcc/songpoll/src/model"
 
 	spotifyauth "github.com/zmb3/spotify/v2/auth"
 
@@ -91,7 +93,7 @@ func (s *Server) GetArtists(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, r.Method+" not allowed on this endpoint", http.StatusMethodNotAllowed)
 		return
 	}
-	fmt.Println("Get Artists")
+	fmt.Println("REQUEST FOR: get artists")
 	artists, err := s.Poller.GetArtists()
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
@@ -124,6 +126,31 @@ func (s *Server) SeachArtists(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(artists)
 }
 
+func (s *Server) AddArtist(w http.ResponseWriter, r *http.Request) {
+	enableCORS(w, r)
+
+	fmt.Println("REQUEST FOR: add artist")
+
+	if r.Method != http.MethodPost {
+		http.Error(w, r.Method+" not allowed on this endpoint", http.StatusMethodNotAllowed)
+		return
+	}
+
+	defer r.Body.Close()
+
+	var artist *model.Artist
+	err := json.NewDecoder(r.Body).Decode(&artist)
+	if err != nil {
+		http.Error(w, "error decoding body", 400)
+		return
+	}
+	artist.LastVisted = time.Now().UTC()
+	err = s.Poller.AddArtist(artist)
+	if err != nil {
+		http.Error(w, "failed to add artist", 500)
+	}
+}
+
 func StartServer(poller *core.Poller) {
 
 	clientID := os.Getenv("SPOTIFY_ID")
@@ -143,5 +170,6 @@ func StartServer(poller *core.Poller) {
 	http.HandleFunc("/callback", server.completeAuth)
 	http.HandleFunc("/artists", server.GetArtists)
 	http.HandleFunc("/spotify/artists", server.SeachArtists)
+	http.HandleFunc("/artist", server.AddArtist)
 	http.ListenAndServe(":8080", nil)
 }

@@ -51,7 +51,7 @@ func (m *MongoClient) CreateArtistURIUniqueIndex(ctx context.Context) error {
 	return nil
 }
 
-func (m *MongoClient) AddArtist(ctx context.Context, artist model.Artist) error {
+func (m *MongoClient) AddArtist(ctx context.Context, artist *model.Artist) error {
 	_, err := m.artists.InsertOne(ctx, artist)
 	if err != nil {
 		return errors.Wrap(err, "failed to insert artist into mongo")

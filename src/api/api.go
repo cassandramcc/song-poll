@@ -115,7 +115,7 @@ func SearchForArtist(ctx context.Context, query string, client *spotify.Client) 
 	var artists []*model.Artist
 	for _, artist := range result.Artists.Artists {
 		artists = append(artists, &model.Artist{
-			URI:  string(artist.URI),
+			URI:  string(artist.ID),
 			Name: artist.Name,
 		})
 	}

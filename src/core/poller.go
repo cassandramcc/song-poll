@@ -21,6 +21,10 @@ func (p *Poller) GetArtists() ([]*model.Artist, error) {
 	return artists, nil
 }
 
+func (p *Poller) AddArtist(artist *model.Artist) error {
+	return p.client.AddArtist(context.Background(), artist)
+}
+
 func NewPoller(client *mongo.MongoClient) *Poller {
 	return &Poller{
 		client: client,
